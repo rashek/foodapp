@@ -21,7 +21,7 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   void initState() {
     _pages = [
-      {'page': CategoriesScreen(), 'title': 'Categories'},
+      {'page': CategoriesScreen(), 'title': 'Letters'},
       {'page': FavoritesScreen(widget.favoriteMeals), 'title': 'Your Favorite'}
     ];
     super.initState();
@@ -33,13 +33,42 @@ class _TabsScreenState extends State<TabsScreen> {
     });
   }
 
+  var scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawerScrimColor: Theme.of(context).primaryColor.withOpacity(.3),
+      key: scaffoldKey,
       appBar: AppBar(
-        title: Text(_pages[_selectedPageIndex]['title']),
+        centerTitle: true,
+        title: Text(
+          _pages[_selectedPageIndex]['title'],
+          style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: 30,
+              color: Theme.of(context).primaryColor),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.book_outlined,
+            color: Theme.of(context).primaryColor,
+            size: 24.0,
+          ),
+          onPressed: () {
+            scaffoldKey.currentState.openDrawer();
+          },
+        ),
       ),
-      drawer: MainDrawer(),
+      drawer: Stack(clipBehavior: Clip.none, children: [
+        ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15.0),
+              bottomLeft: Radius.circular(15.0),
+            ),
+            child: MainDrawer()),
+      ]),
       body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
@@ -51,8 +80,8 @@ class _TabsScreenState extends State<TabsScreen> {
         items: [
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
-            icon: Icon(Icons.category),
-            title: Text('Categories'),
+            icon: Icon(Icons.sort_by_alpha),
+            title: Text('Letters'),
           ),
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
