@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_complete_guide/screens/categories_screen.dart';
 
-import '../widgets/meal_item.dart';
+import '../widgets/animal_item.dart';
 // import '../dummy_data.dart';
-import '../models/meal.dart';
+import '../models/animal.dart';
 
-class CategoryMealsScreen extends StatefulWidget {
+class CategoryAnimalsScreen extends StatefulWidget {
   static const routeName = '/category-meals';
 
-  final List<Meal> availableMeals;
+  final List<Animal> availableAnimals;
 
-  CategoryMealsScreen(this.availableMeals);
+  CategoryAnimalsScreen(this.availableAnimals);
 
   @override
-  _CategoryMealsScreenState createState() => _CategoryMealsScreenState();
+  _CategoryAnimalsScreenState createState() => _CategoryAnimalsScreenState();
 }
 
-class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
+class _CategoryAnimalsScreenState extends State<CategoryAnimalsScreen> {
   String categoryTitle;
-  List<Meal> displayedMeals;
+  List<Animal> displayedAnimals;
   var _loadedInitData = false;
 
   @override
@@ -34,17 +34,17 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
           ModalRoute.of(context).settings.arguments as Map<String, String>;
       categoryTitle = routeArgs['title'];
       final categoryId = routeArgs['id'];
-      displayedMeals = widget.availableMeals.where((meal) {
-        return meal.categories.contains(categoryId);
+      displayedAnimals = widget.availableAnimals.where((animal) {
+        return animal.category.contains(categoryId);
       }).toList();
       _loadedInitData = true;
     }
     super.didChangeDependencies();
   }
 
-  void _removeMeal(String mealId) {
+  void _removeAnimal(String animalId) {
     setState(() {
-      displayedMeals.removeWhere((meal) => meal.id == mealId);
+      displayedAnimals.removeWhere((animal) => animal.id == animalId);
     });
   }
 
@@ -56,16 +56,15 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
       ),
       body: ListView.builder(
         itemBuilder: (ctx, index) {
-          return MealItem(
-            id: displayedMeals[index].id,
-            title: displayedMeals[index].title,
-            imageUrl: displayedMeals[index].imageUrl,
-            duration: displayedMeals[index].duration,
-            affordability: displayedMeals[index].affordability,
-            complexity: displayedMeals[index].complexity,
+          return AnimalItem(
+            id: displayedAnimals[index].id,
+            category: displayedAnimals[index].category,
+            title: displayedAnimals[index].title,
+            imageUrl: displayedAnimals[index].imageUrl,
+            eatingHabit: displayedAnimals[index].eatingHabit,
           );
         },
-        itemCount: displayedMeals.length,
+        itemCount: displayedAnimals.length,
       ),
     );
   }

@@ -5,16 +5,16 @@ import '../dummy_data.dart';
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
   final Function toggleFavorite;
-  final Function isMealFavorite;
+  final Function isAnimalFavorite;
 
-  MealDetailScreen(this.toggleFavorite, this.isMealFavorite);
+  MealDetailScreen(this.toggleFavorite, this.isAnimalFavorite);
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Text(
         text,
-        style: Theme.of(context).textTheme.title,
+        style: Theme.of(context).textTheme.headline6,
       ),
     );
   }
@@ -36,11 +36,12 @@ class MealDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mealId = ModalRoute.of(context).settings.arguments as String;
-    final selectedMeal = DUMMY_MEALS.firstWhere((meal) => meal.id == mealId);
+    final animalId = ModalRoute.of(context).settings.arguments as String;
+    final selectedAnimal =
+        DUMMY_ANIMALS.firstWhere((meal) => meal.id == animalId);
     return Scaffold(
       appBar: AppBar(
-        title: Text('${selectedMeal.title}'),
+        title: Text('${selectedAnimal.title}'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -49,7 +50,7 @@ class MealDetailScreen extends StatelessWidget {
               height: 300,
               width: double.infinity,
               child: Image.network(
-                selectedMeal.imageUrl,
+                selectedAnimal.imageUrl,
                 fit: BoxFit.cover,
               ),
             ),
@@ -63,38 +64,42 @@ class MealDetailScreen extends StatelessWidget {
                         vertical: 5,
                         horizontal: 10,
                       ),
-                      child: Text(selectedMeal.ingredients[index])),
+                      child: Text(
+                        selectedAnimal.description,
+                        style: (TextStyle(color: Colors.white)),
+                      )),
+                  // child: Text(selectedAnimal.ingredients[index])),
                 ),
-                itemCount: selectedMeal.ingredients.length,
+                itemCount: 1,
               ),
             ),
-            buildSectionTitle(context, 'Steps'),
-            buildContainer(
-              ListView.builder(
-                itemBuilder: (ctx, index) => Column(
-                  children: [
-                    ListTile(
-                      leading: CircleAvatar(
-                        child: Text('# ${(index + 1)}'),
-                      ),
-                      title: Text(
-                        selectedMeal.steps[index],
-                      ),
-                    ),
-                    Divider()
-                  ],
-                ),
-                itemCount: selectedMeal.steps.length,
-              ),
-            ),
+            // buildSectionTitle(context, 'Steps'),
+            // buildContainer(
+            //   ListView.builder(
+            //     itemBuilder: (ctx, index) => Column(
+            //       children: [
+            //         ListTile(
+            //           leading: CircleAvatar(
+            //             child: Text('# ${(index + 1)}'),
+            //           ),
+            //           title: Text(
+            //             selectedAnimal.steps[index],
+            //           ),
+            //         ),
+            //         Divider()
+            //       ],
+            //     ),
+            //     itemCount: selectedAnimal.steps.length,
+            //   ),
+            // ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(
-          isMealFavorite(mealId) ? Icons.star : Icons.star_border,
+          isAnimalFavorite(animalId) ? Icons.star : Icons.star_border,
         ),
-        onPressed: () => toggleFavorite(mealId),
+        onPressed: () => toggleFavorite(animalId),
       ),
     );
   }

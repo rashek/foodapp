@@ -1,56 +1,59 @@
 import 'package:flutter/material.dart';
 
 import '../screens/meal_detail_screen.dart';
-import '../models/meal.dart';
+import '../models/animal.dart';
 
-class MealItem extends StatelessWidget {
+class AnimalItem extends StatelessWidget {
   final String id;
+  final String category;
   final String title;
   final String imageUrl;
-  final int duration;
-  final Complexity complexity;
-  final Affordability affordability;
+  // final int duration;
+  final EatingHabit eatingHabit;
+  // final Complexity complexity;
+  // final Affordability affordability;
 
-  MealItem({
+  AnimalItem({
     @required this.id,
+    @required this.category,
     @required this.title,
     @required this.imageUrl,
-    @required this.affordability,
-    @required this.complexity,
-    @required this.duration,
+    @required this.eatingHabit,
+    // @required this.complexity,
+    // @required this.duration,
   });
 
-  String get complexityText {
-    switch (complexity) {
-      case Complexity.Simple:
-        return 'Simple';
+  String get eatingHabitText {
+    switch (eatingHabit) {
+      case EatingHabit.Carnivour:
+        return 'Carnivour';
         break;
-      case Complexity.Challenging:
-        return 'Challenging';
+      case EatingHabit.Harbivour:
+        return 'Harbivour';
         break;
-      case Complexity.Hard:
-        return 'Hard';
+      case EatingHabit.Omnivour:
+        return 'Omnivour';
         break;
       default:
         return 'Unknown';
     }
   }
 
-  String get affordabilityText {
-    switch (affordability) {
-      case Affordability.Affordable:
-        return 'Affordable';
-        break;
-      case Affordability.Pricey:
-        return 'Pricey';
-        break;
-      case Affordability.Luxurious:
-        return 'Expensive';
-        break;
-      default:
-        return 'Unknown';
-    }
-  }
+  // String get affordabilityText {
+  //   switch (affordability) {
+  //     case Affordability.Affordable:
+  //       return 'Affordable';
+  //       break;
+  //     case Affordability.Pricey:
+  //       return 'Pricey';
+  //       break;
+  //     case Affordability.Luxurious:
+  //       return 'Expensive';
+  //       break;
+  //     default:
+  //       return 'Unknown';
+  //   }
+  // }
 
   void selectMeal(BuildContext context) {
     Navigator.of(context)
@@ -119,17 +122,17 @@ class MealItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.schedule,
-                      ),
-                      SizedBox(
-                        width: 6,
-                      ),
-                      Text('$duration min'),
-                    ],
-                  ),
+                  // Row(
+                  //   children: <Widget>[
+                  //     Icon(
+                  //       Icons.schedule,
+                  //     ),
+                  //     SizedBox(
+                  //       width: 6,
+                  //     ),
+                  //     Text('$duration min'),
+                  //   ],
+                  // ),
                   Row(
                     children: <Widget>[
                       Icon(
@@ -138,20 +141,20 @@ class MealItem extends StatelessWidget {
                       SizedBox(
                         width: 6,
                       ),
-                      Text(complexityText),
+                      Text(eatingHabitText),
                     ],
                   ),
-                  Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.attach_money,
-                      ),
-                      SizedBox(
-                        width: 6,
-                      ),
-                      Text(affordabilityText),
-                    ],
-                  ),
+                  // Row(
+                  //   children: <Widget>[
+                  //     Icon(
+                  //       Icons.attach_money,
+                  //     ),
+                  //     SizedBox(
+                  //       width: 6,
+                  //     ),
+                  //     Text(affordabilityText),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

@@ -4,6 +4,7 @@ enum EatingHabit { Carnivour, Harbivour, Omnivour }
 
 class Animal {
   final String id;
+  final String category;
   final String title;
   final String imageUrl;
   final EatingHabit eatingHabit;
@@ -17,6 +18,7 @@ class Animal {
   final bool isInsect;
   const Animal({
     @required this.id,
+    @required this.category,
     @required this.title,
     @required this.imageUrl,
     @required this.eatingHabit,

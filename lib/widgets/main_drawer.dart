@@ -27,23 +27,25 @@ class MainDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            height: 120,
+            height: MediaQuery.of(context).size.height / 2,
             width: double.infinity,
             padding: EdgeInsets.all(20),
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.bottomCenter,
             color: Theme.of(context).accentColor,
             child: Text(
-              'Cooking Up!',
+              // '',
+              'ANIMALS NAMES LEARNING!',
               style: TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 30,
                   color: Theme.of(context).primaryColor),
+              textAlign: TextAlign.center,
             ),
           ),
           SizedBox(
             height: 20,
           ),
-          buildListTile('Meals', Icons.restaurant, () {
+          buildListTile('Letters', Icons.sort_by_alpha, () {
             Navigator.of(context).pushReplacementNamed('/');
           }),
           buildListTile('Filters', Icons.settings, () {

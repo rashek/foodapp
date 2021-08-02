@@ -14,16 +14,22 @@ class FiltersScreen extends StatefulWidget {
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  bool _glutenFree = false;
-  bool _vegetarian = false;
-  bool _vegan = false;
-  bool _lactoseFree = false;
+  bool _bird = false;
+  bool _mammal = false;
+  bool _reptile = false;
+  bool _fish = false;
+  bool _insect = false;
+  bool _native = false;
+  bool _hunter = false;
 
   initState() {
-    _glutenFree = widget.currentFilters['gluten'];
-    _lactoseFree = widget.currentFilters['lactose'];
-    _vegetarian = widget.currentFilters['vegetarian'];
-    _vegan = widget.currentFilters['vegan'];
+    _bird = widget.currentFilters['bird'];
+    _mammal = widget.currentFilters['mammal'];
+    _reptile = widget.currentFilters['reptile'];
+    _fish = widget.currentFilters['fish'];
+    _insect = widget.currentFilters['insect'];
+    _native = widget.currentFilters['native'];
+    _hunter = widget.currentFilters['hunter'];
     super.initState();
   }
 
@@ -52,10 +58,13 @@ class _FiltersScreenState extends State<FiltersScreen> {
               icon: Icon(Icons.save),
               onPressed: () {
                 final selectedFilters = {
-                  'gluten': _glutenFree,
-                  'lactose': _lactoseFree,
-                  'vegeterian': _vegetarian,
-                  'vegan': _vegan,
+                  'bird': _bird,
+                  'mammal': _mammal,
+                  'reptile': _reptile,
+                  'fish': _fish,
+                  'insect': _insect,
+                  'native': _native,
+                  'hunter': _hunter,
                 };
                 widget.saveFilters(selectedFilters);
               })
@@ -72,30 +81,48 @@ class _FiltersScreenState extends State<FiltersScreen> {
           Expanded(
               child: ListView(
             children: [
-              _builderSwitchListTile(
-                  'Gluten-free', 'Only include gluten-free meal', _glutenFree,
+              _builderSwitchListTile('Bird', 'Only include animals Bird', _bird,
                   (newValue) {
                 setState(() {
-                  _glutenFree = newValue;
-                });
-              }),
-              _builderSwitchListTile('Lactose-free',
-                  'Only include lactose-free meal', _lactoseFree, (newValue) {
-                setState(() {
-                  _lactoseFree = newValue;
+                  _bird = newValue;
                 });
               }),
               _builderSwitchListTile(
-                  'Vegetarian', 'Only include vegetarian meal', _vegetarian,
-                  (newValue) {
+                  'Mammal', 'Only include animals Mammal', _mammal, (newValue) {
                 setState(() {
-                  _vegetarian = newValue;
+                  _mammal = newValue;
                 });
               }),
-              _builderSwitchListTile('Vegan', 'Only include Vegan meal', _vegan,
+              _builderSwitchListTile(
+                  'Reptile', 'Only include animals Reptile', _reptile,
                   (newValue) {
                 setState(() {
-                  _vegan = newValue;
+                  _reptile = newValue;
+                });
+              }),
+              _builderSwitchListTile(
+                  'Fish', 'Only include animals without Fish', _fish,
+                  (newValue) {
+                setState(() {
+                  _fish = newValue;
+                });
+              }),
+              _builderSwitchListTile(
+                  'Insect', 'Only include animals Insect', _insect, (newValue) {
+                setState(() {
+                  _insect = newValue;
+                });
+              }),
+              _builderSwitchListTile('All Natvie animal',
+                  'Only include animals that are Native', _native, (newValue) {
+                setState(() {
+                  _native = newValue;
+                });
+              }),
+              _builderSwitchListTile('All Hunter animal',
+                  'Only include animals that are hunter', _hunter, (newValue) {
+                setState(() {
+                  _hunter = newValue;
                 });
               }),
             ],

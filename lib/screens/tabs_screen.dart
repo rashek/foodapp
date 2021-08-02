@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../widgets/main_drawer.dart';
 import './favorites_screen.dart';
 import './categories_screen.dart';
-import '../models/meal.dart';
+import '../models/animal.dart';
 
 class TabsScreen extends StatefulWidget {
-  final List<Meal> favoriteMeals;
+  final List<Animal> favoriteAnimals;
 
-  TabsScreen(this.favoriteMeals);
+  TabsScreen(this.favoriteAnimals);
 
   @override
   _TabsScreenState createState() => _TabsScreenState();
@@ -22,7 +22,10 @@ class _TabsScreenState extends State<TabsScreen> {
   void initState() {
     _pages = [
       {'page': CategoriesScreen(), 'title': 'Letters'},
-      {'page': FavoritesScreen(widget.favoriteMeals), 'title': 'Your Favorite'}
+      {
+        'page': FavoritesScreen(widget.favoriteAnimals),
+        'title': 'Your Favorite'
+      }
     ];
     super.initState();
   }
@@ -44,6 +47,7 @@ class _TabsScreenState extends State<TabsScreen> {
         title: Text(
           _pages[_selectedPageIndex]['title'],
           style: TextStyle(
+              fontFamily: 'RobotoCondensed',
               fontWeight: FontWeight.w900,
               fontSize: 30,
               color: Theme.of(context).primaryColor),
@@ -53,7 +57,7 @@ class _TabsScreenState extends State<TabsScreen> {
         leading: IconButton(
           icon: Icon(
             Icons.book_outlined,
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).accentColor,
             size: 24.0,
           ),
           onPressed: () {
@@ -64,16 +68,18 @@ class _TabsScreenState extends State<TabsScreen> {
       drawer: Stack(clipBehavior: Clip.none, children: [
         ClipRRect(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15.0),
-              bottomLeft: Radius.circular(15.0),
+              topRight: Radius.circular(MediaQuery.of(context).size.height / 2),
+              bottomRight:
+                  Radius.circular(MediaQuery.of(context).size.height / 2),
             ),
             child: MainDrawer()),
       ]),
       body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
-        backgroundColor: Theme.of(context).primaryColor,
-        unselectedItemColor: Colors.white,
+        backgroundColor: Colors.transparent,
+        // backgroundColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Colors.black,
         selectedItemColor: Theme.of(context).accentColor,
         currentIndex: _selectedPageIndex,
         // type: BottomNavigationBarType.fixed,
