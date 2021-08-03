@@ -21,7 +21,7 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   void initState() {
     _pages = [
-      {'page': CategoriesScreen(), 'title': 'Letters'},
+      {'page': CategoriesScreen(), 'title': 'Alphabet'},
       {
         'page': FavoritesScreen(widget.favoriteAnimals),
         'title': 'Your Favorite'

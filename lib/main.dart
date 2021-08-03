@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import './dummy_data.dart';
 
-// import './screens/tab_screen_bottom.dart';
 import './screens/tabs_screen.dart';
-// import './screens/tab_screen.dart';
-import './screens/meal_detail_screen.dart';
+import 'screens/animal_detail_screen.dart';
 import 'screens/category_animals_screen.dart';
 import './screens/filters_screen.dart';
 import './screens/categories_screen.dart';
@@ -63,14 +61,6 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  // bool _isAnimalFavorite(String id) {
-  //   return false;
-  // }
-
-  // bool _toggoleFavorite(String mealId) {
-  //   return false;
-  // }
-
   bool _isAnimalFavorite(String id) {
     return _favoriteAnimals.any((animal) => animal.id == id);
   }
@@ -80,7 +70,7 @@ class _MyAppState extends State<MyApp> {
         _favoriteAnimals.indexWhere((animal) => animal.id == animalId);
     if (existingIndex >= 0) {
       setState(() {
-        _favoriteAnimals.remove(existingIndex);
+        _favoriteAnimals.removeAt(existingIndex);
       });
     } else {
       setState(() {
@@ -94,6 +84,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Learning animals',
       theme: ThemeData(
         primaryColor: Color(0xff24d39b),
@@ -113,28 +104,18 @@ class _MyAppState extends State<MyApp> {
               fontWeight: FontWeight.bold,
             )),
       ),
-      // home: CategoriesScreen(),
+
       initialRoute: '/', // default is '/'
       routes: {
-        // '/': (ctx) => TabScreenBottom(),
-        // '/': (ctx) => TabScreen(),
         '/': (ctx) => TabsScreen(_favoriteAnimals),
         CategoryAnimalsScreen.routeName: (ctx) =>
             CategoryAnimalsScreen(_availableAnimals),
-        MealDetailScreen.routeName: (ctx) =>
-            MealDetailScreen(_toggoleFavorite, _isAnimalFavorite),
+        AnimalDetailScreen.routeName: (ctx) =>
+            AnimalDetailScreen(_toggoleFavorite, _isAnimalFavorite),
         FiltersScreen.routeName: (ctx) =>
             FiltersScreen(saveFilters: _setFilters, currentFilters: _filters),
       },
-      // onGenerateRoute: (settings){
-      //   print(settings.arguments);
-      //   if (settings.name == '/meal-detail') {
-      //     return ...;
-      //   } else if (settings.name == '/something-else') {
-      //     return ...;
-      //   }
-      //   return MaterialPageRoute(builder: (ctx) => CategoriesScreen(),);
-      // },
+
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
           builder: (ctx) => CategoriesScreen(),

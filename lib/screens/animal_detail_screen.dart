@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../dummy_data.dart';
 
-class MealDetailScreen extends StatelessWidget {
+class AnimalDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
   final Function toggleFavorite;
   final Function isAnimalFavorite;
 
-  MealDetailScreen(this.toggleFavorite, this.isAnimalFavorite);
+  AnimalDetailScreen(this.toggleFavorite, this.isAnimalFavorite);
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
@@ -41,6 +41,7 @@ class MealDetailScreen extends StatelessWidget {
         DUMMY_ANIMALS.firstWhere((meal) => meal.id == animalId);
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('${selectedAnimal.title}'),
       ),
       body: SingleChildScrollView(
@@ -54,7 +55,7 @@ class MealDetailScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            buildSectionTitle(context, 'Ingredients'),
+            buildSectionTitle(context, 'Short Description'),
             buildContainer(
               ListView.builder(
                 itemBuilder: (ctx, index) => Card(

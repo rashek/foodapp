@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/meal_detail_screen.dart';
+import '../screens/animal_detail_screen.dart';
 import '../models/animal.dart';
 
 class AnimalItem extends StatelessWidget {
@@ -58,7 +58,7 @@ class AnimalItem extends StatelessWidget {
   void selectMeal(BuildContext context) {
     Navigator.of(context)
         .pushNamed(
-      MealDetailScreen.routeName,
+      AnimalDetailScreen.routeName,
       arguments: id,
     )
         .then((result) {
@@ -96,9 +96,9 @@ class AnimalItem extends StatelessWidget {
                 ),
                 Positioned(
                   bottom: 20,
-                  right: 10,
+                  // right: 10,
                   child: Container(
-                    width: 300,
+                    width: MediaQuery.of(context).size.width,
                     color: Colors.black54,
                     padding: EdgeInsets.symmetric(
                       vertical: 5,
@@ -122,39 +122,21 @@ class AnimalItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  // Row(
-                  //   children: <Widget>[
-                  //     Icon(
-                  //       Icons.schedule,
-                  //     ),
-                  //     SizedBox(
-                  //       width: 6,
-                  //     ),
-                  //     Text('$duration min'),
-                  //   ],
-                  // ),
                   Row(
                     children: <Widget>[
                       Icon(
-                        Icons.work,
+                        Icons.restaurant_menu,
+                        size: 29,
                       ),
                       SizedBox(
                         width: 6,
                       ),
-                      Text(eatingHabitText),
+                      Text(
+                        eatingHabitText,
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ],
                   ),
-                  // Row(
-                  //   children: <Widget>[
-                  //     Icon(
-                  //       Icons.attach_money,
-                  //     ),
-                  //     SizedBox(
-                  //       width: 6,
-                  //     ),
-                  //     Text(affordabilityText),
-                  //   ],
-                  // ),
                 ],
               ),
             ),

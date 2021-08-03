@@ -414,7 +414,7 @@ const DUMMY_ANIMALS = const [
     id: 'a18',
     category: 'f',
     title: 'Falcon',
-    imageUrl: '',
+    imageUrl: 'https://a-z-animals.com/media/Falcon-red-footed-400x300.jpg',
     description:
         'The falcon is faster than any other animal on earth, both on land and in the air',
     eatingHabit: EatingHabit.Carnivour,
@@ -774,7 +774,8 @@ const DUMMY_ANIMALS = const [
     id: 'a41',
     category: 'k',
     title: 'King Crab',
-    imageUrl: '',
+    imageUrl:
+        'https://a-z-animals.com/media/animals/images/original/king_crab3-400x300.jpg',
     description: ' Can have a leg span of nearly 2 meters!',
     eatingHabit: EatingHabit.Carnivour,
     isBird: false,

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_complete_guide/screens/categories_screen.dart';
 
 import '../widgets/animal_item.dart';
-// import '../dummy_data.dart';
 import '../models/animal.dart';
 
 class CategoryAnimalsScreen extends StatefulWidget {
@@ -17,7 +15,9 @@ class CategoryAnimalsScreen extends StatefulWidget {
 }
 
 class _CategoryAnimalsScreenState extends State<CategoryAnimalsScreen> {
+  String categoryId;
   String categoryTitle;
+  Color categoryColor;
   List<Animal> displayedAnimals;
   var _loadedInitData = false;
 
@@ -31,14 +31,17 @@ class _CategoryAnimalsScreenState extends State<CategoryAnimalsScreen> {
   void didChangeDependencies() {
     if (!_loadedInitData) {
       final routeArgs =
-          ModalRoute.of(context).settings.arguments as Map<String, String>;
+          ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
       categoryTitle = routeArgs['title'];
-      final categoryId = routeArgs['id'];
+      categoryId = routeArgs['id'];
+      categoryColor = routeArgs['color'];
+
       displayedAnimals = widget.availableAnimals.where((animal) {
         return animal.category.contains(categoryId);
       }).toList();
       _loadedInitData = true;
     }
+
     super.didChangeDependencies();
   }
 
@@ -52,7 +55,16 @@ class _CategoryAnimalsScreenState extends State<CategoryAnimalsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(categoryTitle),
+        centerTitle: true,
+        title: Text(
+          categoryId.toUpperCase() + ' for ' + categoryTitle,
+          style: TextStyle(
+              fontFamily: 'RobotoCondensed',
+              fontWeight: FontWeight.w900,
+              fontSize: 30,
+              color: categoryColor),
+        ),
+        backgroundColor: Colors.transparent,
       ),
       body: ListView.builder(
         itemBuilder: (ctx, index) {
